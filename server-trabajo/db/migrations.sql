@@ -3,7 +3,7 @@ CREATE DATABASE trabajo;
 CREATE TABLE users (id SERIAL PRIMARY KEY, email VARCHAR(255), 
 					password_digest VARCHAR(255), token VARCHAR(255));
 
-CREATE TABLE applications (id SERIAL PRIMARY KEY, date, job_id INT references jobs(id), 
+CREATE TABLE applications (id SERIAL PRIMARY KEY, app_date DATE, job_id INT references jobs(id), 
 							contact_id INT references contacts(id), 
 							company_id INT references companies(id));
 
