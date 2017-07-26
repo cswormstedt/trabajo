@@ -1,0 +1,48 @@
+<button (click)="logout()">Logout</button>
+<div>
+  <button (click)="showPostForm = !showPostForm">New Application</button>
+  <div *ngIf="showPostForm">
+    <input [(ngModel)]="newApplication.app_date" type="date"/>
+    <input [(ngModel)]="newApplication.company_name" placeholder="Company Name"/>
+    <input [(ngModel)]="newApplication.job_title" placeholder="Job Title"/>
+    <input [(ngModel)]="newApplication.job_description" placeholder="Description"/>
+    <input [(ngModel)]="newApplication.contact_name" placeholder="Contact Name"/>
+    <input [(ngModel)]="newApplication.contact_email" placeholder="Contact Email" type="email"/>
+    
+    <button (click)="postApplication()">Submit</button>
+  </div>
+  <div *ngIf="showPatchForm">
+    <input [(ngModel)]="updateApplication.app_date" placeholder="Date Applied"/>
+    <input [(ngModel)]="updateApplication.company_name" placeholder="Company Name"/>
+    <input [(ngModel)]="updateApplication.job_title" placeholder="Job Title"/>
+    <input [(ngModel)]="updateApplication.job_description" placeholder="Description"/>
+    <input [(ngModel)]="updateApplication.contact_name" placeholder="Contact Name"/>
+    <input [(ngModel)]="updateApplication.contact_email" placeholder="Contact Email"/>
+    
+    <button (click)="patchApplication()">Submit</button>
+  </div>
+  <table>
+    <tr>
+      <th></th>
+      <th>Date</th>
+      <th>Company Name</th>
+      <th>Job title</th>
+      <th>Description</th>
+      <th>Conytact Name</th>
+      <th>Contact Email</th>
+
+    </tr>
+    <tr *ngFor="let application of applications">
+      <td (click)="goToApplication(application)"></td>
+      <td>{{application.app_date}}</td>
+      <td>{{application.company_name}}</td>
+      <td>{{application.job_title}}</td>
+      <td>{{application.job_decription}}</td>
+      <td>{{application.contact_name}}</td>
+      <td>{{application.contact_email}}</td>
+      <td><button (click)="editApplication(application)">Edit</button></td>
+      <td><button (click)="deleteApplication(application)">Delete</button></td>
+    </tr>
+  </table>
+</div>
+

@@ -1,37 +1,24 @@
-class ApplicationController <  MainController
-
-	get '/' do
-		applications = Application.all
-		applications.to_json
+class ApplicationController < Sinatra::Base
+	options '*' do
+		response['Access-Control-Allow-Headers'] = 'content-type'
+    	response['Access-Control-Allow-Methods'] = 'GET,POST,PATCH,DELETE'
+    	200
 	end
 
-	get '/:id' do
-		id = params[:id]
-		applications = Application.find(id)
-		application.to_json
-	end
+	before do
+		response['Access-Control-Allow-Origin'] = '*'
+    	content_type :json
 
-	post '/' do
-		request_body = JSON.parse(request.body.read)
-		application = Application.new(request_body)
-		application.save
-		Application.all.to_json
+    	path = request.fullpath.split("?")[0]
+    	if ['/users/login','/users/register'].include?(path) || request.request_method == 'OPTIONS'
+    		pass
+    	end
+    	token = params[:token]
+    	user = User.find_by(token: token)
+    	if user
+    		pass
+    	else
+    		halt 403
+    	end
 	end
-
-	patch '/:id' do
-		id = params[:id]
-	    application = Application.find(id)
-	    request_body = JSON.parse(request.body.read)
-	    application.update_attributes(request_body)
-	    application.save
-	    Application.all.to_json
-	end
-
-	delete '/:id' do
-	    id = params[:id]
-	    application = application.find(id)
-	    application.destroy
-	    Application.all.to_json
-	end
-
 end
