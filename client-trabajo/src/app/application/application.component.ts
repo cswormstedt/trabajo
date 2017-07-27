@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import { Router } from '@angular/router';
+import { ControlValueAccessor} from '@angular/forms';
+
+
+
+
 
 class Application{
   id: number;
@@ -16,7 +21,8 @@ class Application{
 @Component({
   selector: 'app-root',
   templateUrl: './Application.component.html',
-  styleUrls: ['./Application.component.css']
+  styleUrls: ['./Application.component.css'],
+  
 })
 
 export class ApplicationComponent {
@@ -25,15 +31,20 @@ export class ApplicationComponent {
   updateApplication: Application = new Application();
   showPostForm: boolean = false;
   showPatchForm: boolean = false;
+  stars: boolean[] = Array(5).fill(false);
+
+
+
 
   // method that runs when Class is initialized
   constructor(private http: Http, private router: Router){
     this.getApplications();
+
   }
 
   getApplications(){
     this.http.get('http://localhost:9393/applications?token=' + window.localStorage.token).subscribe(response => {
-      this.applications = response.json()
+      this.applications = response.json();
     }, err => {
       //if permission denied
       if(err.status === 403){
@@ -48,7 +59,6 @@ export class ApplicationComponent {
     this.showPostForm = false
     this.http.post('http://localhost:9393/applications?token=' + window.localStorage.token, this.newApplication).subscribe(response =>{
       this.applications = response.json()
-      this.getApplications()
     }, err =>{
       //if permission denied
       if(err.status === 403){
@@ -59,15 +69,25 @@ export class ApplicationComponent {
     })
   }
 
+  get value(): number {
+    return this.stars.reduce((total, starred) => {
+      return total + (starred ? 1 : 0);
+    }, 0);
+  }
+
+  rate(rating: number) {
+    this.stars = this.stars.map((_, i) => rating > i);
+  }
+
   patchApplication(){
     this.showPatchForm = false
-    this.http.patch('http://localhost:9393/applications/' + this.updateApplication.id, this.updateApplication).subscribe(response =>
+    this.http.patch('http://localhost:9393/applications/' + this.updateApplication.id + '?token=' + window.localStorage.token, this.updateApplication).subscribe(response =>
       this.applications = response.json()
     )
   }
 
   deleteApplication(application){
-    this.http.delete('http://localhost:9393/spplications/' + application.id).subscribe(response =>
+    this.http.delete('http://localhost:9393/applications/' + application.id + '?token=' + window.localStorage.token ).subscribe(response =>
       this.applications = response.json()
     )
   }

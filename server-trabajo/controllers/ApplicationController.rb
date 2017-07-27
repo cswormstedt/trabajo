@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
     	content_type :json
 
     	path = request.fullpath.split("?")[0]
-    	if ['/users/login','/users/register'].include?(path) || request.request_method == 'OPTIONS'
+    	if ['/users/login','/users/register', '/applications'].include?(path) || request.request_method == 'OPTIONS'
     		pass
     	end
     	token = params[:token]
