@@ -5,11 +5,13 @@ import { Router } from '@angular/router'
 @Component({
   selector: 'app-root',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 
 export class LoginComponent {
   user = {};
+
+ 
 
   constructor(private http: Http, private router: Router){
 

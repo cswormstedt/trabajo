@@ -1,5 +1,26 @@
+
+<label for="email">Email</label>
+<br>
+
 <input [(ngModel)]="user.email" placeholder="Email" type="email"/>
-<input [(ngModel)]="user.password" placeholder="Password" type="password"/>
+
+
+
+<!-- <input  placeholder="Password" type="password"/> -->
+
+
+
+<br>
+<label for="password">Password</label>
+   <div>
+       <form name="myForm" novalidate>
+            <input [(ngModel)]="user.password" type="password" id="password" name="password" placeholder="Password" minlength="5" maxlength="50" required>
+            <ng2-password-strength-bar
+                [passwordToCheck]="user.password">
+            </ng2-password-strength-bar>
+        </form>
+    </div>
+
 <button (click)="login()">Log In</button>
 
 <button (click)="register()">Sign Up</button>

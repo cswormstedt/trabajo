@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http'
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BusyModule } from 'angular2-busy';
+
 import {
   animate,
   state,
@@ -12,8 +12,7 @@ import {
   transition,
   trigger } from '@angular/animations'
 
-
-
+import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -50,7 +49,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
-    BusyModule
+    PasswordStrengthBarModule
     
   ],
   providers: [],

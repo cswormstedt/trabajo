@@ -22,7 +22,7 @@ export class RegisterComponent {
     })
   }
 
-  LogIn(){
+  login(){
     this.router.navigate(['/login'])
   }
 }

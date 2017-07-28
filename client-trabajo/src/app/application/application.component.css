@@ -1,11 +1,17 @@
- span {
-      display: inline-block;
-      width: 25px;
-      line-height: 25px;
-      text-align: center;
-      cursor: pointer;
-    }
+
+
+button:focus { outline: none; }
+button {
+	border: none;
+	background: transparent;
+
+	}
 
  #logout {
  	float: right;
+ }
+
+ .jobApp {
+ 	padding-left: 10px;
+ 	display: inline-block;
  }

@@ -4,9 +4,6 @@ import { Router } from '@angular/router';
 import { ControlValueAccessor} from '@angular/forms';
 
 
-
-
-
 class Application{
   id: number;
   app_date: string;
@@ -32,9 +29,7 @@ export class ApplicationComponent {
   showPostForm: boolean = false;
   showPatchForm: boolean = false;
   stars: boolean[] = Array(5).fill(false);
-
-
-
+  
 
   // method that runs when Class is initialized
   constructor(private http: Http, private router: Router){
