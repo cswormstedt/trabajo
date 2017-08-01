@@ -1,8 +1,19 @@
 
-<button id="logout" (click)="logout()"><span class="glyphicon glyphicon glyphicon-off" aria-hidden="true"></span></button>
+<header>
+  <button class="edit btn btn-default" (click)="showPostForm = !showPostForm">
+    <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+  </button>
+  <button class="btn btn-default" id="logout" (click)="logout()">
+    <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i>
+  </button>
+
+  <h2>Trabajo</h2>
+
+  
+</header>
+
 
 <div>
-  <button (click)="showPostForm = !showPostForm"><span class="glyphicon glyphicon glyphicon-file" aria-hidden="true"></span></button>
 
   <div *ngIf="showPostForm">
     <input [(ngModel)]="newApplication.app_date" type="date"/>
@@ -11,19 +22,7 @@
     <input [(ngModel)]="newApplication.job_description" placeholder="Description"/>
     <input [(ngModel)]="newApplication.contact_name" placeholder="Contact Name"/>
     <input [(ngModel)]="newApplication.contact_email" placeholder="Contact Email" type="email"/>
-    <button (click)="postApplication()">Submit</button>
-  </div>
-
-
-  <div *ngIf="showPatchForm">
-    <input [(ngModel)]="updateApplication.app_date" type="date"/>
-    <input [(ngModel)]="updateApplication.company_name" placeholder="Company"/>
-    <input [(ngModel)]="updateApplication.job_title" placeholder="Job Title"/>
-    <input [(ngModel)]="updateApplication.job_description" placeholder="Description"/>
-    <input [(ngModel)]="updateApplication.contact_name" placeholder="Contact Name"/>
-    <input [(ngModel)]="updateApplication.contact_email" placeholder="Contact Email" type="email"/>
-    
-    <button (click)="patchApplication()">Update</button>
+    <button class="btn btn-default" (click)="postApplication()"><i class="fa fa-share-square-o fa-lg" aria-hidden="true"></i></button>
   </div>
 
 
@@ -35,29 +34,70 @@
             <div class="panel-heading" role="tab" id="heading" data-id="{{ application.id }}">
               <h4 class="panel-title">
                 
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}" aria-expanded="false" aria-controls=""><button><span class="glyphicon glyphicon glyphicon-list" aria-hidden="true"></span></button></a>
-                <div class = "jobApp">
-                
-                <p>{{application.app_date}}
-                {{application.company_name}}
-                {{application.job_title}}
-                {{application.job_description}}
-                {{application.contact_name}}
-                {{application.contact_email}}</p>
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}" aria-expanded="false" aria-controls=""><button class="btn btn-default"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></button></a>
+
+                <div id = "list">
+
+                <p>
+                <span class ="jobApp">Date:</span> {{application.app_date}}
+                <span class ="jobApp">Role:</span> {{application.job_title}}
+                </p>
                 </div>
                 
               </h4>
+
             </div>
 
             <div id="collapse{{i}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading">
                
-               <p>{{application.contact_name}}</p>
-               <button (click)="editApplication(application)">
-                  <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span>
-               </button>     
-               <button (click)="deleteApplication(application)">
-                  <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span>
-               </button> 
+              <table class = "table-striped table-condensed table-bordered">
+                <thead>
+                  <tr>
+                    <th>Company</th>
+                    <th>Job Title</th>
+                    <th>Job Decsription</th>
+                    <th>Contact Name</th>
+                    <th>Contact Email</th>
+                    <th>
+                    <button class= "btn btn-success" (click)="editApplication(application)">
+                        <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                    </button> 
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{application.company_name}}</td>
+                    <td>{{application.job_title}}</td>
+                    <td>{{application.job_description}}</td>
+                    <td>{{application.contact_name}}</td>
+                    <td>{{application.contact_email}}</td>
+                    <td>
+                      <button class="btn btn-danger" id="trash" (click)="deleteApplication(application)"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i> 
+                      </button>
+                      <button class="btn" (click)="goToApplication(application)">More detail</button>
+                     
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+               
+               
+
+               <div *ngIf="showPatchForm">
+                <input [(ngModel)]="updateApplication.app_date" type="date"/>
+                <input [(ngModel)]="updateApplication.company_name" placeholder="Company"/>
+                <input [(ngModel)]="updateApplication.job_title" placeholder="Job Title"/>
+                <input [(ngModel)]="updateApplication.job_description" placeholder="Description"/>
+                <input [(ngModel)]="updateApplication.contact_name" placeholder="Contact Name"/>
+                <input [(ngModel)]="updateApplication.contact_email" placeholder="Contact Email" type="email"/>
+                
+                <button class="btn" (click)="patchApplication()"><i class="fa fa-share-square-o fa-lg" aria-hidden="true"></i></button>
+              </div>
+
+
 
 
             </div>

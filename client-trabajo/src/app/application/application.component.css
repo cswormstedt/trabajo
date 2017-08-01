@@ -1,17 +1,28 @@
+h2 {
+	text-align: center;
+}
 
 
-button:focus { outline: none; }
-button {
-	border: none;
-	background: transparent;
-
-	}
 
  #logout {
  	float: right;
+ 	margin-right: 10px;
  }
 
- .jobApp {
- 	padding-left: 10px;
- 	display: inline-block;
+.edit {
+ 	float: left;
+ 	margin-left: 10px;
  }
+
+.jobApp, #list{
+	display: inline-block;
+} 
+.jobApp {
+ 	padding-left: 10px;
+ 	
+ 	color: #275cb2;
+ }
+
+#trash.hover {
+	color: #cc1414
+}

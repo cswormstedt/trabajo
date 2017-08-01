@@ -28,7 +28,7 @@ export class ApplicationComponent {
   updateApplication: Application = new Application();
   showPostForm: boolean = false;
   showPatchForm: boolean = false;
-  stars: boolean[] = Array(5).fill(false);
+ 
   
 
   // method that runs when Class is initialized
@@ -64,15 +64,7 @@ export class ApplicationComponent {
     })
   }
 
-  get value(): number {
-    return this.stars.reduce((total, starred) => {
-      return total + (starred ? 1 : 0);
-    }, 0);
-  }
 
-  rate(rating: number) {
-    this.stars = this.stars.map((_, i) => rating > i);
-  }
 
   patchApplication(){
     this.showPatchForm = false
@@ -88,12 +80,12 @@ export class ApplicationComponent {
   }
 
   editApplication(application){
-    this.showPatchForm = true;
+    this.showPatchForm = !this.showPatchForm;
     this.updateApplication = Object.assign({},application);
   }
 
   goToApplication(application){
-    this.router.navigate(['/applications/', application.id])
+    this.router.navigate(['/applications', application.id])
   }
 
   logout(){

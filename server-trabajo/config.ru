@@ -3,10 +3,12 @@ Bundler.require
 
 require './models/ApplicationModel'
 require './models/UserModel'
+require './models/FeatureModel'
 
 require './controllers/ApplicationController'
 require './controllers/AppController'
 require './controllers/UserController'
+require './controllers/FeatureController'
 
 run Sinatra::Application
 

@@ -1,0 +1,19 @@
+.registerForm {
+	margin: 0 auto;
+	width: 142px;
+    height: 100px;
+}
+
+h1, h2, .label, input{
+	text-align: center;
+}
+
+#b {
+	margin: 0 auto;
+	width: 100px;
+	text-align: center;
+}
+
+#bar {
+	padding-left: 7px;
+}

@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http'
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 import {
   animate,
   state,
@@ -18,6 +19,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ApplicationComponent } from './application/application.component';
+import { AppDetailComponent } from './app-detail/app-detail.component';
 
 const routes: Routes = [
 
@@ -32,6 +34,10 @@ const routes: Routes = [
   {
   	path: 'application',
   	component: ApplicationComponent
+  },
+  {
+    path: 'applications/:id',
+    component: AppDetailComponent
   }
 
 ]
@@ -42,6 +48,7 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     ApplicationComponent,
+    AppDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +56,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
-    PasswordStrengthBarModule
+    PasswordStrengthBarModule,
     
   ],
   providers: [],
