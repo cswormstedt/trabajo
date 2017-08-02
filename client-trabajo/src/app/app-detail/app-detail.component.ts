@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Http, Response } from '@angular/http';
 
 
@@ -32,7 +32,7 @@ export class AppDetailComponent implements OnInit{
 	heart: boolean = false
 
 
-  constructor(private http: Http, private route: ActivatedRoute) {
+  constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
   	let id = this.route.snapshot.params.id;
 
     this.getApplication(id)
@@ -45,6 +45,10 @@ export class AppDetailComponent implements OnInit{
    	this.http.get('http://localhost:9393/applications/' + id + '?token=' + window.localStorage.token).subscribe(response =>
    	 this.application = response.json())
    }
+
+    app(){
+   this.router.navigate(['/application'])
+ }
 
    hearted(){
    	this.heart = false

@@ -4,6 +4,27 @@
     height: 100px;
 }
 
-h1 {
+h1, input{
 	text-align: center;
+}
+
+
+#sign {
+    padding: 6px 7px 6px;
+    margin-left: 15px;
+
+}
+
+#log {
+	border-color: #000000;
+	background-color: rgb(254, 247, 73);
+	margin-left: 3px;
+}
+
+#buttonss {
+	width: 152px;
+}
+
+#email {
+	margin-bottom: 10px;
 }

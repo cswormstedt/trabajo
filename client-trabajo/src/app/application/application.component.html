@@ -1,16 +1,17 @@
+<nav class="navbar navbar-inverse navbar-static-top">
 
-<header>
   <button class="edit btn btn-default" (click)="showPostForm = !showPostForm">
     <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
   </button>
+
   <button class="btn btn-default" id="logout" (click)="logout()">
     <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i>
   </button>
 
-  <h2>Trabajo</h2>
+  <h2 id="title">Trabajo</h2>
 
   
-</header>
+</nav>
 
 
 <div>
@@ -39,8 +40,8 @@
                 <div id = "list">
 
                 <p>
-                <span class ="jobApp">Date:</span> {{application.app_date}}
-                <span class ="jobApp">Role:</span> {{application.job_title}}
+                {{application.app_date}}
+                <span >Role:</span> {{application.job_title}}
                 </p>
                 </div>
                 
@@ -50,41 +51,22 @@
 
             <div id="collapse{{i}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading">
                
-              <table class = "table-striped table-condensed table-bordered">
-                <thead>
-                  <tr>
-                    <th>Company</th>
-                    <th>Job Title</th>
-                    <th>Job Decsription</th>
-                    <th>Contact Name</th>
-                    <th>Contact Email</th>
-                    <th>
-                    <button class= "btn btn-success" (click)="editApplication(application)">
+            <div>
+              <ul>
+                <li>{{application.company_name}}</li>
+                <li>{{application.job_title}}</li>
+                <li>{{application.job_description}}</li>
+                <li>{{application.contact_name}}</li>
+                <li>{{application.contact_email}}</li>
+              </ul>
+
+              <button class= "btn btn-success" (click)="editApplication(application)">
                         <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
                     </button> 
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{{application.company_name}}</td>
-                    <td>{{application.job_title}}</td>
-                    <td>{{application.job_description}}</td>
-                    <td>{{application.contact_name}}</td>
-                    <td>{{application.contact_email}}</td>
-                    <td>
-                      <button class="btn btn-danger" id="trash" (click)="deleteApplication(application)"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i> 
-                      </button>
-                      <button class="btn" (click)="goToApplication(application)">More detail</button>
-                     
-                    </td>
-                  </tr>
 
-                </tbody>
-              </table>
-
-               
-               
+                    <button class="btn btn-danger" id="trash" (click)="deleteApplication(application)"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></button>
+                      <button class="btn" id="yellow" (click)="goToApplication(application)">More detail</button>
+            </div>
 
                <div *ngIf="showPatchForm">
                 <input [(ngModel)]="updateApplication.app_date" type="date"/>
@@ -96,9 +78,6 @@
                 
                 <button class="btn" (click)="patchApplication()"><i class="fa fa-share-square-o fa-lg" aria-hidden="true"></i></button>
               </div>
-
-
-
 
             </div>
           </div>

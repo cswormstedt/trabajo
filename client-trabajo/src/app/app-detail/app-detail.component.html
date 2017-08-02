@@ -1,5 +1,9 @@
+<nav class="navbar navbar-inverse navbar-static-top">
+<button class=" edit btn"  id="back" (click)="app()"><i class="fa fa-chevron-left fa-lg" aria-hidden="true"></i></button>
+<h1>{{application.job_title}}</h1>
+</nav>
+
 <div>
-<p>Job : {{application.job_title}}</p>
 <p>Date : {{application.app_date}}</p>
 <p>Company : {{application.company_name}}</p>
 </div>
@@ -7,4 +11,11 @@
 <!-- <button (click)="hearted = !hearted"></button>
 
 <div *ngif="!hearted"><i class="fa fa-heart-o fa-lg" aria-hidden="true"></i></div> -->
-<i class="fa fa-heart fa-lg" aria-hidden="true"></i>
+<!-- <i class="fa fa-heart fa-lg" aria-hidden="true"></i> -->
+
+<div>	
+  <textarea name="message" rows="6" cols="20">Notes</textarea>
+  <br>
+  <input class="btn" id="yellow" type="submit">
+</div>
+

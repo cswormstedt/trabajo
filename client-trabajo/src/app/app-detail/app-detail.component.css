@@ -1,0 +1,9 @@
+h1 {
+	text-align: center;
+	color: rgb(254, 247, 73);
+}
+.edit {
+ 	position: fixed;
+    top: 16px;
+ 	margin-left: 16px;
+ }

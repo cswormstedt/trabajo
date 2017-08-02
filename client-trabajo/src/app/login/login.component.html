@@ -1,9 +1,9 @@
-<header><h1>Trabajo</h1></header>
+<header><h1 id="title">Trabajo</h1></header>
 
 
 <div class="loginForm">
 
-<input [(ngModel)]="user.email" placeholder="Email" type="email"/>
+<input id="email" [(ngModel)]="user.email" placeholder="Email" type="email"/>
 
 
 <form name="myForm" novalidate>
@@ -13,8 +13,8 @@
     </ng2-password-strength-bar>
 </form>
 
-
-<button class="btn btn-success" (click)="login()">Log In</button><button class="btn btn-primary"(click)="register()">Sign Up</button>
-
+<div id="buttonss">
+<button class="btn" id="log"(click)="login()">Log In</button><button class="btn btn-primary" id="sign"(click)="register()">Sign Up</button>
+</div>
 
 </div>

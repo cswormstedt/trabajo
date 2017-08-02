@@ -1,12 +1,12 @@
-<header><h1>Trabajo</h1>
-<h2>Sign Up</h2>
+<header><h1 id="title">Trabajo</h1>
+
 </header>
 
 <div class="registerForm">
 
 <br>
 
-<input [(ngModel)]="user.email" placeholder="Email" type="email"/>
+<input id="reg" [(ngModel)]="user.email" placeholder="Email" type="email"/>
 
 
 <br>
@@ -14,12 +14,12 @@
    <div>
        <form name="myForm" novalidate>
             <input [(ngModel)]="user.password" type="password" id="password" name="password" placeholder="Enter password" minlength="5" maxlength="50" required>
-       </form>
-       <form id="bar" novalidate>
+       
+       
             <ng2-password-strength-bar
                 [passwordToCheck]="user.password">
             </ng2-password-strength-bar>
         </form>
     </div>
 </div>
-<div id="b"><button class="btn btn-primary"(click)="register()">Sign Up</button></div>
+<div id="b"><button class="btn btn-primary" id="sign"(click)="register()">Sign Up</button></div>

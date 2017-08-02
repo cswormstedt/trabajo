@@ -1,0 +1,31 @@
+#b {
+	position: fixed;
+    top: 21px;
+    right: 15px;
+}
+
+#yellow {
+	background-color: rgb(254, 247, 73)	
+}
+
+#title {
+	color: rgb(254, 247, 73)
+}
+
+
+
+.welcome2 {
+  color: #ffffff;
+  font-size: 250%;
+  font-weight: 500;
+  text-shadow: 0 1px 5px #000000;
+  text-align: center;
+}
+
+.welcome1 {
+  color: #ffffff;
+  font-size: 355%;
+  font-weight: 500;
+  text-shadow: 0 1px 5px #000000;
+  text-align: center;
+}
