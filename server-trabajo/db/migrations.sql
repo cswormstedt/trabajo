@@ -8,5 +8,6 @@ CREATE TABLE applications (id SERIAL PRIMARY KEY, app_date DATE,
 							contact_name VARCHAR(255), contact_email VARCHAR(255), 
 							company_name VARCHAR(255), user_id INT references users(id));
 
-CREATE TABLE features (id SERIAL PRIMARY KEY, heart BOOLEAN, 
+CREATE TABLE status (id SERIAL PRIMARY KEY, want BOOLEAN, follow_up BOOLEAN, 
+						hear BOOLEAN, passed_on BOOLEAN, promising BOOLEAN, 
 						notes TEXT, application_id INT references applications(id));

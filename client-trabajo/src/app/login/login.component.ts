@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Http, Response } from '@angular/http'
 import { Router } from '@angular/router'
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './login.component.html',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router'
 
 export class LoginComponent {
   user = {};
+  message: string = "password is too shorts";
 
  
 
@@ -23,10 +25,17 @@ export class LoginComponent {
     this.http.post('http://localhost:9393/users/login', this.user).subscribe(response => {
       window.localStorage.setItem("token",response.json().token)
       this.router.navigate(['/application'])
+
     })
   }
 
   register(){
     this.router.navigate(['/register'])
   }
+
+  home(){
+    this.router.navigate(['/'])
+  }
+
+
 }

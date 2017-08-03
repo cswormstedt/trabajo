@@ -2,6 +2,8 @@ import { Component} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import { Router } from '@angular/router';
 import { ControlValueAccessor} from '@angular/forms';
+import { DatePipe } from '@angular/common';
+
 
 
 class Application{
@@ -51,6 +53,7 @@ export class ApplicationComponent {
   }
 
   postApplication(){
+    
     this.showPostForm = false
     this.http.post('http://localhost:9393/applications?token=' + window.localStorage.token, this.newApplication).subscribe(response =>{
       this.applications = response.json()

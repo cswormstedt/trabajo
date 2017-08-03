@@ -3,8 +3,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http'
 import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+
 
 import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
+import {ToggleButtonModule} from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -46,14 +49,15 @@ const routes: Routes = [
     ApplicationComponent,
     AppDetailComponent,
     HomeComponent,
+
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
     RouterModule.forRoot(routes),
-   
     PasswordStrengthBarModule,
+    ToggleButtonModule
     
   ],
   providers: [],

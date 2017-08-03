@@ -1,12 +1,38 @@
+@media only screen and (max-width: 640px) and (min-width: 320px) {
+	input {
+		margin: 10px;
+		width: 150px;
+	}	
+}
+.post {
+		margin: 10px;
+		display: block;
+	}
 h2 {
 	text-align: center;
 }
 
- #logout {
+#j {
+	color: rgb(254, 240, 0);
+	font-size: 150%;
+	font-weight: 500;
+  	text-shadow: 0 1px 5px #000000;
+}
+
+.body {
+	padding-top: 85px;
+}
+
+ .logout {
  	position: fixed;
     top: 16px;
     right: 16px;
  }
+
+
+.info {
+	margin-left: 50px;
+}
 
 .edit {
  	position: fixed;
@@ -25,4 +51,10 @@ h2 {
 
 #trash.hover {
 	color: #cc1414
+}
+
+input {
+	margin: 10px;
+	border-color: black;
+	border-radius: 4px;
 }

@@ -1,4 +1,3 @@
-class Feature < ActiveRecord::Base
-	self.table_name = 'features'
+class Status < ActiveRecord::Base
 	belongs_to :application
 end

@@ -1,10 +1,10 @@
-<nav class="navbar navbar-inverse navbar-static-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
 
-  <button class="edit btn btn-default" (click)="showPostForm = !showPostForm">
-    <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+  <button class="edit btn" id="yellow" (click)="showPostForm = !showPostForm">
+    <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
   </button>
 
-  <button class="btn btn-default" id="logout" (click)="logout()">
+  <button class="logout btn" id="yellow" (click)="logout()">
     <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i>
   </button>
 
@@ -14,16 +14,20 @@
 </nav>
 
 
-<div>
+<div class="body">
 
-  <div *ngIf="showPostForm">
+  <div class="info" *ngIf="showPostForm">
     <input [(ngModel)]="newApplication.app_date" type="date"/>
     <input [(ngModel)]="newApplication.company_name" placeholder="Company"/>
     <input [(ngModel)]="newApplication.job_title" placeholder="Job Title"/>
     <input [(ngModel)]="newApplication.job_description" placeholder="Description"/>
     <input [(ngModel)]="newApplication.contact_name" placeholder="Contact Name"/>
     <input [(ngModel)]="newApplication.contact_email" placeholder="Contact Email" type="email"/>
-    <button class="btn btn-default" (click)="postApplication()"><i class="fa fa-share-square-o fa-lg" aria-hidden="true"></i></button>
+      <div class="post">
+        <button class="btn" id="yellow" (click)="postApplication()">
+          <i class="fa fa-share-square-o fa-lg" aria-hidden="true"></i>
+        </button>
+      </div>
   </div>
 
 
@@ -40,8 +44,9 @@
                 <div id = "list">
 
                 <p>
-                {{application.app_date}}
-                <span >Role:</span> {{application.job_title}}
+                {{application.app_date}}:
+                <span id="j">{{application.company_name}}</span>
+                
                 </p>
                 </div>
                 
@@ -51,24 +56,26 @@
 
             <div id="collapse{{i}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading">
                
-            <div>
-              <ul>
-                <li>{{application.company_name}}</li>
-                <li>{{application.job_title}}</li>
-                <li>{{application.job_description}}</li>
-                <li>{{application.contact_name}}</li>
-                <li>{{application.contact_email}}</li>
-              </ul>
-
+            <div class="info">
+              
+              <h3>{{application.job_title}}</h3>
+              <h3>{{application.contact_name}}</h3>
+              <h3>{{application.contact_email}}</h3>
+              <h3>{{application.job_description}}</h3>
+         
               <button class= "btn btn-success" (click)="editApplication(application)">
-                        <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
-                    </button> 
-
-                    <button class="btn btn-danger" id="trash" (click)="deleteApplication(application)"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></button>
-                      <button class="btn" id="yellow" (click)="goToApplication(application)">More detail</button>
+                <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+              </button>
+              <button class="btn" id="yellow" (click)="goToApplication(application)">
+                <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+              </button>
+              <button class="btn btn-danger" id="trash" (click)="deleteApplication(application)">
+                <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+              </button>
+                      
             </div>
 
-               <div *ngIf="showPatchForm">
+               <div class="info" *ngIf="showPatchForm">
                 <input [(ngModel)]="updateApplication.app_date" type="date"/>
                 <input [(ngModel)]="updateApplication.company_name" placeholder="Company"/>
                 <input [(ngModel)]="updateApplication.job_title" placeholder="Job Title"/>
@@ -76,7 +83,7 @@
                 <input [(ngModel)]="updateApplication.contact_name" placeholder="Contact Name"/>
                 <input [(ngModel)]="updateApplication.contact_email" placeholder="Contact Email" type="email"/>
                 
-                <button class="btn" (click)="patchApplication()"><i class="fa fa-share-square-o fa-lg" aria-hidden="true"></i></button>
+                <button class="btn" id="yellow" (click)="patchApplication()"><i class="fa fa-share-square-o fa-lg" aria-hidden="true"></i></button>
               </div>
 
             </div>

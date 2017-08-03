@@ -1,4 +1,10 @@
-<header><h1 id="title">Trabajo</h1></header>
+
+<header>
+<button class="h btn" (click)="home()">
+		<i class="fa fa-chevron-left fa-lg" aria-hidden="true"></i>
+	</button>
+<h1 id="title">Trabajo</h1>
+</header>
 
 
 <div class="loginForm">
@@ -7,10 +13,8 @@
 
 
 <form name="myForm" novalidate>
-    <input [(ngModel)]="user.password" type="password" id="password" name="password" placeholder="Password" minlength="5" maxlength="50" required>
-    <ng2-password-strength-bar
-        [passwordToCheck]="user.password">
-    </ng2-password-strength-bar>
+    <input [(ngModel)]="user.password" type="password" id="password" name="password" placeholder="Password" minlength="8" maxlength="50" required>
+    
 </form>
 
 <div id="buttonss">
