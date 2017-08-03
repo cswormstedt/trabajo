@@ -2,13 +2,16 @@
 	input {
 		margin: 10px;
 		width: 150px;
-	}	
+	}
+	.c {
+	text-align: center;	
+	}
 }
 .post {
 		margin: 10px;
 		display: block;
 	}
-h2 {
+h2, .c {
 	text-align: center;
 }
 

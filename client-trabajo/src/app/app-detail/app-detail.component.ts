@@ -23,6 +23,14 @@ class Feature {
 	notes: string;
 }
 
+class Status {
+  want: boolean;
+  follow_up: boolean;
+  hear: boolean;
+  passed_on: boolean;
+  promising: boolean;
+}
+
 
 @Component({
   selector: 'app-app-detail',
@@ -34,11 +42,7 @@ export class AppDetailComponent implements OnInit{
   feature: Feature = new Feature();
   today: number = Date.now();
   days: number;
-
-
-  
-
-
+  status: Status[] = [];
 
 
   constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
@@ -71,6 +75,8 @@ export class AppDetailComponent implements OnInit{
   app(){
    this.router.navigate(['/application'])
   }
+
+  
 
 
 
