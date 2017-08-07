@@ -1,9 +1,11 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import { Router } from '@angular/router';
 import { ControlValueAccessor} from '@angular/forms';
 import { DatePipe } from '@angular/common';
-
+import {NgProgressService} from 'ngx-progressbar';
+import 'rxjs/add/operator/takeUntil';
+import { Subject } from 'rxjs/Subject';
 
 
 class Application{
@@ -24,24 +26,30 @@ class Application{
   
 })
 
-export class ApplicationComponent {
+export class ApplicationComponent implements OnInit{
   applications: Application[] = [];
   newApplication: Application = new Application();
   updateApplication: Application = new Application();
   showPostForm: boolean = false;
   showPatchForm: boolean = false;
+  private ngUnsubscribe: Subject<void> = new Subject<void>(); // = new Subject();
  
   
 
   // method that runs when Class is initialized
-  constructor(private http: Http, private router: Router){
+  constructor(private http: Http, private router: Router, public progressService: NgProgressService){
     this.getApplications();
 
   }
+  ngOnInit(){
+    
+  }
 
   getApplications(){
-    this.http.get('http://localhost:9393/applications?token=' + window.localStorage.token).subscribe(response => {
-      this.applications = response.json();
+    this.progressService.start();
+    this.http.get('http://localhost:9393/applications?token=' + window.localStorage.token).takeUntil(this.ngUnsubscribe).subscribe(response => {
+      this.applications = response.json()
+      this.progressService.done();
     }, err => {
       //if permission denied
       if(err.status === 403){
@@ -53,10 +61,11 @@ export class ApplicationComponent {
   }
 
   postApplication(){
-    
+   
     this.showPostForm = false
     this.http.post('http://localhost:9393/applications?token=' + window.localStorage.token, this.newApplication).subscribe(response =>{
       this.applications = response.json()
+
     }, err =>{
       //if permission denied
       if(err.status === 403){
@@ -66,8 +75,6 @@ export class ApplicationComponent {
       }
     })
   }
-
-
 
   patchApplication(){
     this.showPatchForm = false
@@ -89,6 +96,7 @@ export class ApplicationComponent {
 
   goToApplication(application){
     this.router.navigate(['/applications', application.id])
+    this.ngUnsubscribe.complete();
   }
 
   logout(){

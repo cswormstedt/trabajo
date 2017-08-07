@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Http, Response } from '@angular/http';
 import { DatePipe } from '@angular/common';
-
-
-
+import {NgProgressService} from 'ngx-progressbar';
+import 'rxjs/add/operator/takeUntil';
+import { Subject } from 'rxjs/Subject';
 
 
 class Application{
@@ -43,24 +43,30 @@ export class AppDetailComponent implements OnInit{
   today: number = Date.now();
   days: number;
   status: Status[] = [];
+  private ngUnsubscribe: Subject<void> = new Subject<void>(); // = new Subject();
 
 
   constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
-  	let id = this.route.snapshot.params.id;
-    this.getApplication(id);
+  	
+
+    let id = this.route.snapshot.params.id;
+     this.getApplication(id);
 
 
    }
 
      ngOnInit() {
-  
+        
+
         }
 
    getApplication(id) {
-     
-   	this.http.get('http://localhost:9393/applications/' + id + '?token=' + window.localStorage.token).subscribe(response =>
+
+   	this.http.get('http://localhost:9393/applications/' + id + '?token=' + window.localStorage.token).takeUntil(this.ngUnsubscribe).subscribe(response =>
     {this.application = response.json()
-    
+
+
+
     var date1 = new Date(this.application["app_date"]);
     
     var date2 = new Date(this.today);
@@ -69,11 +75,13 @@ export class AppDetailComponent implements OnInit{
 
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     this.days = diffDays - 1; 
+    
     }) 
    }
 
   app(){
    this.router.navigate(['/application'])
+   this.ngUnsubscribe.complete();
   }
 
   

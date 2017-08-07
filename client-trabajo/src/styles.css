@@ -7,6 +7,10 @@
   background-position: center center;
 }
 
+ng-progress {
+  z-index: 10002;
+}
+
 #yellow {
 	background-color: rgb(254, 247, 73);
 
