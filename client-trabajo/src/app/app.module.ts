@@ -15,7 +15,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ApplicationComponent } from './application/application.component';
-import { AppDetailComponent } from './app-detail/app-detail.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -32,10 +31,7 @@ const routes: Routes = [
   	path: 'application',
   	component: ApplicationComponent
   },
-  {
-    path: 'applications/:id',
-    component: AppDetailComponent
-  },
+
   {
     path: '',
     component: HomeComponent
@@ -49,7 +45,6 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     ApplicationComponent,
-    AppDetailComponent,
     HomeComponent,
 
   ],

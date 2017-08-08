@@ -11,7 +11,7 @@ import { Router } from '@angular/router'
 
 export class LoginComponent {
   user = {};
-  message: string = "password is too shorts";
+  message: string = "username or password is incorrect";
 
  
 
@@ -19,16 +19,19 @@ export class LoginComponent {
 
   }
 
-
-
   login(){
 
     this.http.post('http://localhost:9393/users/login', this.user).subscribe(response => {
       window.localStorage.setItem("token",response.json().token)
-
-
       this.router.navigate(['/application'])
 
+    },err => {
+      //if permission denied
+      if(err.status === 403){
+        this.router.navigate(['/login'])
+      }else{
+        this.message
+      }
     })
   }
 

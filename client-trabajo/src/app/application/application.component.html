@@ -8,6 +8,10 @@
     <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
   </button>
 
+  <button class="settings btn" id="yellow">
+    <i class="fa fa-cog fa-lg" aria-hidden="true"></i>
+  </button>
+
   <button class="logout btn" id="yellow" (click)="logout()">
     <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i>
   </button>
@@ -50,6 +54,7 @@
                 <p>
                 {{application.app_date}}:
                 <span id="j">{{application.company_name}}</span>
+                days active: {{application.active}}
                 
                 </p>
                 </div>
@@ -61,18 +66,44 @@
             <div id="collapse{{i}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading">
                
             <div class="info">
-              
-              <h3>{{application.job_title}}</h3>
-              <h3>{{application.contact_name}}</h3>
-              <h3>{{application.contact_email}}</h3>
-              <h3>{{application.job_description}}</h3>
+                 <div data-toggle="buttons">
+                  <label class="btn btn-warning">
+                    <input type="checkbox" name="options" id="option1"> Want <i class="fa fa-diamond fa-lg" aria-hidden="true"></i>
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="checkbox" name="options" id="option2"> Send follow up <i class="fa fa-sticky-note fa-lg" aria-hidden="true"></i>
+                  </label>
+                  <label class="btn btn-info">
+                    <input type="checkbox" name="options" id="option3"> Waiting to hear <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
+                  </label>
+                  <label class="btn btn-danger">
+                    <input type="checkbox" name="options" id="option4"> Passed on <i class="fa fa-meh-o fa-lg" aria-hidden="true"></i>
+                  </label>
+                  <label class="btn" id="yellow">
+                    <input type="checkbox" name="options" id="option5"> Promising <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>
+                  </label>
+                </div> 
+
+                <dir>
+                  <h3>{{application.job_title}}</h3>
+                  <h3>{{application.contact_name}} </h3>
+                  <h3>{{application.contact_email}} </h3>
+                  <h3>{{application.job_description}}</h3>
+                </dir>
+                <div>
+                  <p>Current Date: {{today | date: 'y-MM-dd'}}</p>
+                  <p>Date Applied : {{application.app_date}}</p>
+                </div>
+
+                <div> 
+                  <textarea name="message" rows="5" cols="10" placeholder="Notes" style="background-color: rgba(254, 247, 70, 0.7);"></textarea>
+                  <button class="btn" id="yellow" style="border-color: black"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></button>
+                </div>
          
               <button class= "btn btn-success" (click)="editApplication(application)">
-                <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
-              </button>
-              <button class="btn" id="yellow" (click)="goToApplication(application)">
                 <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
               </button>
+              
               <button class="btn btn-danger" id="trash" (click)="deleteApplication(application)">
                 <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
               </button>
@@ -93,9 +124,7 @@
             </div>
           </div>
         </div>
-    </div>
-
-    
+    </div>    
 
 </div>
 
