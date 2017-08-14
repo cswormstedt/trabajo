@@ -3,6 +3,7 @@ import {Http, Response } from '@angular/http'
 import { Router } from '@angular/router'
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './login.component.html',
@@ -24,7 +25,6 @@ export class LoginComponent {
     this.http.post('http://localhost:9393/users/login', this.user).subscribe(response => {
       window.localStorage.setItem("token",response.json().token)
       this.router.navigate(['/application'])
-
     },err => {
       //if permission denied
       if(err.status === 403){

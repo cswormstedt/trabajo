@@ -11,14 +11,6 @@ class AppController < ApplicationController
 			
 	end
 
-	# get '/:company' do
-	# 	token = params[:token]
-	# 	user = User.where(token: token)
-	# 	user_id = user[0].id
-	# 	company = params[:company_name]
-	# 	applications = Application.where(user_id: user_id)
-	# 	applications.to_json
-	# end
 
 	get '/:id' do
 		id = params[:id]

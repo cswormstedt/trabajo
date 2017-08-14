@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Http, Response } from '@angular/http'
 import { Router } from '@angular/router'
-import {NgProgressService} from 'ngx-progressbar';
+
 
 
 @Component({
@@ -18,12 +18,11 @@ export class RegisterComponent {
   }
 
   register(){
-  
+ 
     this.http.post('http://localhost:9393/users/register', this.user).subscribe(response => {
       window.localStorage.setItem("token",response.json().token)
-
-
       this.router.navigate(['/application'])
+
     })
   }
 

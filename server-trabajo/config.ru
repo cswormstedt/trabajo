@@ -19,3 +19,4 @@ ActiveRecord::Base.establish_connection(
 
 map('/applications'){run AppController}
 map('/users'){run UserController}
+map('/features'){run FeatureController}

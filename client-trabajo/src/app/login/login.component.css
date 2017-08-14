@@ -18,12 +18,14 @@ h1, input{
 #log {
 	border-color: #000000;
 	background-color: rgb(254, 247, 73);
-	margin-left: 3px;
+	margin-left: 8px;
+	padding: 6px 7px 6px;
+
 }
 
 #buttonss {
 	margin-top: 10px;
-	width: 152px;
+	width: 170px;
 }
 
 #email {

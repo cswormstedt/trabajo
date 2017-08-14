@@ -5,10 +5,11 @@ import { HttpModule } from '@angular/http'
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
-
 import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
-import {ToggleButtonModule} from 'primeng/primeng';
+import { ToggleButtonModule} from 'primeng/primeng';
 import { NgProgressModule } from 'ngx-progressbar';
+
+
 
 
 import { AppComponent } from './app.component';
@@ -48,6 +49,7 @@ const routes: Routes = [
     HomeComponent,
 
   ],
+
   imports: [
     BrowserModule,
     HttpModule,
@@ -56,6 +58,7 @@ const routes: Routes = [
     PasswordStrengthBarModule,
     ToggleButtonModule,
     NgProgressModule
+
     
   ],
   providers: [],

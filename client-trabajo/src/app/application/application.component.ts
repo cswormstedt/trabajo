@@ -7,6 +7,7 @@ import {NgProgressService} from 'ngx-progressbar';
 
 
 
+
 class Application{
   id: number;
   app_date: string;
@@ -18,7 +19,6 @@ class Application{
   user_id: number;
   active: number;
 }
-
 
 @Component({
   selector: 'app-root',
@@ -34,6 +34,15 @@ export class ApplicationComponent {
   showPostForm: boolean = false;
   showPatchForm: boolean = false;
   today: number = Date.now();
+  currentUpdate: string;
+
+  update = [
+  "Want",
+  "Promising",
+  "Send a follow up",
+  "Waiting to hear",
+  "Passed on"
+  ];
 
   // method that runs when Class is initialized
   constructor(private http: Http, private router: Router, public progressService: NgProgressService){
@@ -41,28 +50,25 @@ export class ApplicationComponent {
     this.getApplications();
 
   }
+
   
   getApplications(){
     this.progressService.start();
     this.http.get('http://localhost:9393/applications?token=' + window.localStorage.token).subscribe(response => {
       this.applications = response.json()
 
-    for (var i = 0; i <= this.applications.length -1; i++) {
+    for (let i = 0; i <= this.applications.length -1; i++) {
   
-   
-        var date1 = new Date(this.applications[i]["app_date"]);
-        console.log(date1)
+        let date1 = new Date(this.applications[i]["app_date"]);
     
-        var date2 = new Date(this.today);
-        console.log(date2)
+        let date2 = new Date(this.today);
+      
 
+        let timeDiff = Math.abs(date2.getTime() - date1.getTime());
 
-        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-
-        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
         this.applications[i]["active"]= diffDays - 1;
-        console.log(this.applications[i]["active"])
 
     }
     this.progressService.done()
@@ -99,6 +105,8 @@ export class ApplicationComponent {
       this.applications = response.json()
     )
   }
+
+
 
   deleteApplication(application){
     this.http.delete('http://localhost:9393/applications/' + application.id + '?token=' + window.localStorage.token ).subscribe(response =>
