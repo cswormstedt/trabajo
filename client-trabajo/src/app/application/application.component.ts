@@ -40,7 +40,7 @@ export class ApplicationComponent {
   closeResult: string;
   currentShowId: number;
 
-   public isCollapsed = false;
+
   update = [
   "Want",
   "Promising",
@@ -90,7 +90,7 @@ export class ApplicationComponent {
 
   postApplication(){
    
-    this.showPostForm = false
+    this.showPostForm = false;
     this.http.post('http://localhost:9393/applications?token=' + window.localStorage.token, this.newApplication).subscribe(response =>{
       this.applications = response.json()
 
@@ -105,15 +105,21 @@ export class ApplicationComponent {
   }
 
   patchApplication(){
-    this.showPatchForm = false
-    this.http.patch('http://localhost:9393/applications/' + this.updateApplication.id + '?token=' + window.localStorage.token, this.updateApplication).subscribe(response =>
-      this.applications = response.json()
+    this.showPatchForm = false;
+    this.http.patch('http://localhost:9393/applications/' + this.updateApplication.id + '?token=' + window.localStorage.token, this.updateApplication).subscribe(response => {
+      this.applications = response.json();
+      console.log(this.updateApplication)
+      console.log(this.updateApplication.id)
+
+    }
+    
     )
   }
 
   deleteApplication(application){
     this.http.delete('http://localhost:9393/applications/' + application.id + '?token=' + window.localStorage.token ).subscribe(response =>
       this.applications = response.json()
+
     )
   }
 
@@ -124,6 +130,9 @@ open(content) {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
+
+
 
 private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -136,12 +145,16 @@ private getDismissReason(reason: any): string {
   }
 
 
-  editApplication(application){
-
+editApplication(application){
     this.showPatchForm = !this.showPatchForm;
-  
     this.updateApplication = Object.assign({},application);
+ 
   }
+
+
+
+
+  
 
 
   logout(){
