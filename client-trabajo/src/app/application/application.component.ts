@@ -3,8 +3,8 @@ import {Http, Response} from '@angular/http';
 import { Router } from '@angular/router';
 import { ControlValueAccessor} from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import {NgProgressService} from 'ngx-progressbar';
-
+import { NgProgressService } from 'ngx-progressbar';
+import { NgbModule, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -18,7 +18,9 @@ class Application{
   company_name: string;
   user_id: number;
   active: number;
+
 }
+
 
 @Component({
   selector: 'app-root',
@@ -35,7 +37,10 @@ export class ApplicationComponent {
   showPatchForm: boolean = false;
   today: number = Date.now();
   currentUpdate: string;
+  closeResult: string;
+  currentShowId: number;
 
+   public isCollapsed = false;
   update = [
   "Want",
   "Promising",
@@ -45,7 +50,7 @@ export class ApplicationComponent {
   ];
 
   // method that runs when Class is initialized
-  constructor(private http: Http, private router: Router, public progressService: NgProgressService){
+  constructor(private http: Http, private router: Router, public progressService: NgProgressService, private modalService: NgbModal){
  
     this.getApplications();
 
@@ -68,7 +73,7 @@ export class ApplicationComponent {
 
         let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-        this.applications[i]["active"]= diffDays - 1;
+        this.applications[i]["active"] = diffDays - 1;
 
     }
     this.progressService.done()
@@ -106,16 +111,35 @@ export class ApplicationComponent {
     )
   }
 
-
-
   deleteApplication(application){
     this.http.delete('http://localhost:9393/applications/' + application.id + '?token=' + window.localStorage.token ).subscribe(response =>
       this.applications = response.json()
     )
   }
 
+open(content) {
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+
   editApplication(application){
+
     this.showPatchForm = !this.showPatchForm;
+  
     this.updateApplication = Object.assign({},application);
   }
 

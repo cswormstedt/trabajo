@@ -2,8 +2,6 @@
              [speed]="200" [showSpinner]="false" [direction]="'leftToRightIncreased'"
              [color]="'#FEF749'" [trickleSpeed]="250" [thick]="true" [ease]="'linear'"
 ></ng-progress>
-
-
 <nav class="navbar navbar-dark bg-dark fixed-top">
 
   <button class="my-sm-0 btn" id="yellow" (click)="showPostForm = !showPostForm">
@@ -16,7 +14,6 @@
   <button class="my-sm-0 btn" id="yellow" (click)="logout()">
     <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i>
   </button>
-
 
 </nav>
 
@@ -40,10 +37,116 @@
   </div>
 
 
+
+
+
+
+
 <div *ngFor="let application of applications; let i = index" [attr.data-index]="i"> 
-<div class="card " data-id="{{ application.id }}">
+
+<div id="accordion" role="tablist">
+  <div class="card">
+    <div class="card-header" role="tab" id="heading" data-id="{{ application.id }}">
+      <h5 class="mb-0" id="j">
+      <a data-toggle="collapse" href="#collapse{{i}}" aria-expanded="false" aria-controls="">+</a>
+
+        {{application.company_name}}<i class="fa fa-angle-double-right" aria-hidden="true"> </i> <span>Active Days: {{application.active}}</span>
+      </h5>
+    </div>
+
+    <div id="collapse{{i}}" class="collapse" role="tabpanel" aria-labelledby="heading" data-parent="#accordion">
+      <div class="card-body">
+      <div class="row">
+ 
+
+      <div class="btn-group-vertical">
+       <div class="status" data-toggle="buttons">
+        <label class="btn btn-warning">
+          <input type="radio" name="options" id="option1"> Want <i class="fa fa-diamond fa-lg" aria-hidden="true"></i>
+        </label>
+        <label class="btn btn-success">
+          <input type="radio" name="options" id="option5"> Promising <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>
+        </label>
+        <label class="btn btn-primary">
+          <input type="radio" name="options" id="option2"> Send follow up <i class="fa fa-sticky-note fa-lg" aria-hidden="true"></i>
+        </label>
+        <label class="btn btn-info">
+          <input type="radio" name="options" id="option3"> Waiting to hear <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
+        </label>
+        <label class="btn btn-danger">
+          <input type="radio" name="options" id="option4"> Passed on <i class="fa fa-meh-o fa-lg" aria-hidden="true"></i>
+        </label>
+            
+
+       </div> 
+      </div>
+
+    
+      <div class="app">
+        <h5>Job: {{application.job_title}}</h5>
+        <h5>Contact: {{application.contact_name}} </h5>
+        <a href="mailto:{{application.contact_email}}"><h5>{{application.contact_email}} </h5></a>
+        <h5> Job info: {{application.job_description}}</h5>
+        <p>Today is: {{today | date: 'y-MM-dd'}}</p>
+        <p>Date Applied : {{application.app_date}}</p>
+
+        <button class="btn" id=yellow (click)="editApplication(application)">
+          Edit
+        </button>
+        <button class="btn btn-danger" (click)="open(content)">Delete</button>
+      <div>
+      
+
+
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete Trabajo</h4>
+        </div>
+        <div class="modal-body">
+          <p>This action cannot be undone!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+
+           <button class="btn btn-danger" id="trash" (click)="deleteApplication(application)" (click)="d('Cross click')">
+                      Delete
+          </button>
+        </div>
+      </ng-template>
+      </div>  
+
+
+      <div class="info" >
+          <div *ngIf="showPatchForm" >
+            <div>
+              <input [(ngModel)]="updateApplication.company_name" placeholder="Company"/>
+              <input [(ngModel)]="updateApplication.job_title" placeholder="Job Title"/>
+              <input [(ngModel)]="updateApplication.job_description" placeholder="Description"/>
+              <input [(ngModel)]="updateApplication.contact_name" placeholder="Contact Name"/>
+              <input [(ngModel)]="updateApplication.contact_email" placeholder="Contact Email" type="email"/> 
+              <button class="c btn-secondary" (click)="patchApplication()">Update Trabajo</button>
+            
+            </div>
+          </div>
+      </div>
+      </div>
+
+  </div>
+        
+      </div>
+    </div>
+  </div>
+
+        
+
+</div>
+
+
+
+<!-- <div class="card " >
   <div class="card-header">
-    <h3 id="j">{{application.company_name}} </h3><i class="fa fa-angle-double-right" aria-hidden="true"> </i> Active Days: {{application.active}}
+
+    <h3 id="j">{{application.company_name}}  </h3><i class="fa fa-angle-double-right" aria-hidden="true"> </i> <span>Active Days: {{application.active}}</span>
   </div>
 
   <div class="row">
@@ -72,44 +175,74 @@
       </div>
 
     
-      <div class="card-text app">
+      <div class="app">
         <h5>Job: {{application.job_title}}</h5>
         <h5>Contact: {{application.contact_name}} </h5>
         <a href="mailto:{{application.contact_email}}"><h5>{{application.contact_email}} </h5></a>
         <h5> Job info: {{application.job_description}}</h5>
-     
-        <p>Current Date: {{today | date: 'y-MM-dd'}}</p>
+        <p>Today is: {{today | date: 'y-MM-dd'}}</p>
         <p>Date Applied : {{application.app_date}}</p>
-        <button class= "btn" id=yellow (click)="editApplication(application)">
+
+        <button class="btn" id=yellow (click)="editApplication(application)">
           Edit
         </button>
-              
-          <button class="btn btn-danger" id="trash" (click)="deleteApplication(application)">
-                Delete
-          </button>
-      </div>
-  </div>
-      <div class="card-text info">
+        <button class="btn btn-danger" (click)="open(content)">Delete</button>
+
+         <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="isCollapsed" aria-controls="collapseExample">Toggle
+        </button>
+      <div>
       
 
-          <div  *ngIf="showPatchForm">
-         
-          <div >
-            <input [(ngModel)]="updateApplication.company_name" placeholder="Company"/>
-            <input [(ngModel)]="updateApplication.job_title" placeholder="Job Title"/>
-            <input [(ngModel)]="updateApplication.job_description" placeholder="Description"/>
-            <input [(ngModel)]="updateApplication.contact_name" placeholder="Contact Name"/>
-            <input [(ngModel)]="updateApplication.contact_email" placeholder="Contact Email" type="email"/> 
-            <button class="c btn-secondary" (click)="patchApplication()">Update Trabajo</button>
-           <!--  <textarea rows="3" cols="30" style="background-color: rgba(254, 247, 70, 0.9); border-radius: 4px;"></textarea> -->
+
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete Trabajo</h4>
+        </div>
+        <div class="modal-body">
+          <p>This action cannot be undone!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+
+           <button class="btn btn-danger" id="trash" (click)="deleteApplication(application)" (click)="d('Cross click')">
+                      Delete
+          </button>
+        </div>
+      </ng-template>
+      </div>  
+
+
+      <div class="info" >
+          <div *ngIf="showPatchForm" >
+            <div>
+              <input [(ngModel)]="updateApplication.company_name" placeholder="Company"/>
+              <input [(ngModel)]="updateApplication.job_title" placeholder="Job Title"/>
+              <input [(ngModel)]="updateApplication.job_description" placeholder="Description"/>
+              <input [(ngModel)]="updateApplication.contact_name" placeholder="Contact Name"/>
+              <input [(ngModel)]="updateApplication.contact_email" placeholder="Contact Email" type="email"/> 
+              <button class="c btn-secondary" (click)="patchApplication()">Update Trabajo</button>
             
-          </div>
+            </div>
           </div>
       </div>
-     
+      </div>
 
-  
+  </div>
+
+
+    
+     
 
 </div>
 
+
+
+
+</div>
+ NGFOR DIV END -->
+
+
+</div>
+<!-- BODY DIV END -->
 

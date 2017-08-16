@@ -74,14 +74,7 @@ h2, .c, #title {
  	margin-left: 16px;
  }
 
-.jobApp, #list{
-	display: inline-block;
-} 
-.jobApp {
- 	padding-left: 10px;
- 	
- 	color: #275cb2;
- }
+
 
 #trash.hover {
 	color: #cc1414

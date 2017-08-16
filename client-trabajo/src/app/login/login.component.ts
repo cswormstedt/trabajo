@@ -29,8 +29,6 @@ export class LoginComponent {
       //if permission denied
       if(err.status === 403){
         this.router.navigate(['/login'])
-      }else{
-        this.message
       }
     })
   }

@@ -26,7 +26,10 @@ ng-progress {
  }
 
 #title {
+  margin-left: 30px;
 	color: rgb(254, 247, 73);
+  text-shadow: 0 1px 5px #000000;
+
 }
 
 .h {
