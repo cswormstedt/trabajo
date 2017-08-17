@@ -17,35 +17,32 @@
 </nav>
 
 <div class="body">
-    <div>
-      <ng-template #form let-z="close" let-q="dismiss">
-        <div class="modal-header">
-          <h4 class="modal-title">Add Trabajo</h4>
-        </div>
-          <div class="modal-body">
-            <input [(ngModel)]="newApplication.app_date" type="date"/>
-            <input [(ngModel)]="newApplication.company_name" placeholder="Company"/>
-            <input [(ngModel)]="newApplication.job_title" placeholder="Job Title"/>
-            <input [(ngModel)]="newApplication.job_description" placeholder="Description"/>
-            <input [(ngModel)]="newApplication.contact_name" placeholder="Contact Name"/>
-            <input [(ngModel)]="newApplication.contact_email" placeholder="Contact Email" type="email"/>
-          </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="z('Close click')">Close
-          </button>
-          <button class="btn btn-secondary" (click)="postApplication()" (click)="q('Cross click')">Add Trabajo
-          </button>
-        </div>
-      </ng-template>
-    </div> 
-    
- 
+  <div>
+    <ng-template #form let-z="close" let-q="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Trabajo</h4>
+      </div>
+      <div class="modal-body">
+        <input [(ngModel)]="newApplication.app_date" type="date"/>
+        <input [(ngModel)]="newApplication.company_name" placeholder="Company"/>
+        <input [(ngModel)]="newApplication.job_title" placeholder="Job Title"/>
+        <input [(ngModel)]="newApplication.job_description" placeholder="Description"/>
+        <input [(ngModel)]="newApplication.contact_name" placeholder="Contact Name"/>
+        <input [(ngModel)]="newApplication.contact_email" placeholder="Contact Email" type="email"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="z('Close click')">Close
+        </button>
+        <button class="btn btn-secondary" (click)="postApplication()" (click)="q('Cross click')">Add Trabajo
+        </button>
+      </div>
+    </ng-template>
+  </div> 
   <div *ngFor="let application of applications; let i = index" [attr.data-index]="i"> 
     <div id="accordion" role="tablist">
         <div class="card" style="margin-bottom: 15px;">
           <div class="card-header" role="tab" id="heading" data-id="{{ application.id }}">
-            <h5 class="mb-0"><a role="button" data-toggle="collapse" href="#collapse{{i}}"  aria-expanded="false" aria-controls=""><button class="btn"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></button></a> <span id="j">{{application.company_name}}</span><i id="m" class="fa fa-angle-double-right" aria-hidden="true"> </i> <span stlye="color: #000000;">Active Days: {{application.active}}</span></h5>
-            
+            <h5 class="mb-0"><a role="button" data-toggle="collapse" href="#collapse{{i}}"  aria-expanded="false" aria-controls=""><button class="btn"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></button></a> <span id="j">{{application.company_name}}</span><i id="m" class="fa fa-angle-double-right" aria-hidden="true"> </i><span stlye="color: #000000;">Active Days: {{application.active}}</span></h5>  
           </div>
           <div id="collapse{{i}}" class="collapse" role="tabpanel" aria-labelledby="heading" data-parent="#accordion">
           <div class="card-body">
