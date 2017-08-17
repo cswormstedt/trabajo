@@ -34,7 +34,7 @@ export class ApplicationComponent {
   newApplication: Application = new Application();
   updateApplication: Application = new Application();
   showPostForm: boolean = false;
-  showPatchForm: boolean = false;
+  // showPatchForm: boolean = true;
   today: number = Date.now();
   currentUpdate: string;
   closeResult: string;
@@ -56,6 +56,9 @@ export class ApplicationComponent {
 
   }
 
+  getActiveDays(){
+    
+  }
   
   getApplications(){
     this.progressService.start();
@@ -94,6 +97,8 @@ export class ApplicationComponent {
     this.http.post('http://localhost:9393/applications?token=' + window.localStorage.token, this.newApplication).subscribe(response =>{
       this.applications = response.json()
 
+
+
     }, err =>{
       //if permission denied
       if(err.status === 403){
@@ -105,15 +110,20 @@ export class ApplicationComponent {
   }
 
   patchApplication(){
-    this.showPatchForm = false;
+    // this.showPatchForm = true;
     this.http.patch('http://localhost:9393/applications/' + this.updateApplication.id + '?token=' + window.localStorage.token, this.updateApplication).subscribe(response => {
       this.applications = response.json();
-      console.log(this.updateApplication)
-      console.log(this.updateApplication.id)
+   
 
-    }
-    
-    )
+    })
+  }
+
+  AddApplication(form, application) {
+    this.modalService.open(form).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
   deleteApplication(application){
@@ -132,8 +142,6 @@ open(content) {
   }
 
 
-
-
 private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -145,17 +153,18 @@ private getDismissReason(reason: any): string {
   }
 
 
-editApplication(application){
-    this.showPatchForm = !this.showPatchForm;
+editApplication(app, application){
+    // this.showPatchForm = !this.showPatchForm;
+
     this.updateApplication = Object.assign({},application);
+
+    this.modalService.open(app).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
  
   }
-
-
-
-
-  
-
 
   logout(){
     window.localStorage.clear();

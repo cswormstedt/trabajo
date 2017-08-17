@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-
+.modal-content {
+  top: 100px;
+}
 
 .startimg {
   background-image: url('http://i.imgur.com/j5MpUWS.jpg');
