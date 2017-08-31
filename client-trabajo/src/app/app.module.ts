@@ -8,7 +8,7 @@ import { DatePipe } from '@angular/common';
 import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
 import { ToggleButtonModule} from 'primeng/primeng';
 import { NgProgressModule } from 'ngx-progressbar';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -60,7 +60,8 @@ const routes: Routes = [
     PasswordStrengthBarModule,
     ToggleButtonModule,
     NgProgressModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+
 
 
     

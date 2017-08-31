@@ -33,7 +33,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="z('Close click')">Close
         </button>
-        <button class="btn btn-secondary" (click)="postApplication()" (click)="q('Cross click')">Add Trabajo
+        <button class="btn btn-secondary" (click)="postApplication()" (click)="q('Cross click')" (click)="currentValue = 25">Add Trabajo
         </button>
       </div>
     </ng-template>
@@ -46,24 +46,32 @@
           </div>
           <div id="collapse{{i}}" class="collapse" role="tabpanel" aria-labelledby="heading" data-parent="#accordion">
           <div class="card-body">
+
+          <p><ngb-progressbar showValue="true" type="success" [value]="currentValue"></ngb-progressbar></p>
+
+          <button class="btn btn-sm btn-outline-primary" (click)="currentValue = 25"></button>
+          <button class="btn btn-sm btn-outline-primary" (click)="currentValue = 50"></button>
+          <button class="btn btn-sm btn-outline-primary" (click)="currentValue = 75"></button>
+          <button class="btn btn-sm btn-outline-primary" (click)="currentValue = 100"></button>
+
             <div class="row">
               <div class="btn-group-vertical">
                 <div class="status" data-toggle="buttons">
                   <label class="btn btn-warning">
-                  <input type="radio" name="options" id="option1"> Want <i class="fa fa-diamond fa-lg" aria-hidden="true"></i>
+                  <input type="checkbox" name="completed1" id="input1" value="20"> Want <i class="fa fa-diamond fa-lg" aria-hidden="true"></i>
                   </label>
                   <label class="btn btn-success">
-                    <input type="radio" name="options" id="option5"> Promising <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>
+                    <input type="checkbox" name="completed2" id="input5" value="20"> Promising <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>
                   </label>
                   <label class="btn btn-primary">
-                    <input type="radio" name="options" id="option2"> Send follow up <i class="fa fa-sticky-note fa-lg" aria-hidden="true"></i>
+                    <input type="checkbox" name="completed3" id="input2" value="20"> Send follow up <i class="fa fa-sticky-note fa-lg" aria-hidden="true"></i>
                   </label>
                   <label class="btn btn-info">
-                    <input type="radio" name="options" id="option3"> Waiting to hear <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
+                    <input type="checkbox" name="completed4" id="input3" value="20"> Waiting to hear <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
                   </label>
-                  <label class="btn btn-danger">
-                    <input type="radio" name="options" id="option4"> Passed on <i class="fa fa-meh-o fa-lg" aria-hidden="true"></i>
-                  </label>
+                  <!-- <label class="btn btn-danger">
+                    <input type="checkbox" name="completed5" id="input4" value="20"> Passed on <i class="fa fa-meh-o fa-lg" aria-hidden="true"></i>
+                  </label> -->
                 </div> 
               </div>
               <div class="app">
@@ -75,7 +83,7 @@
                 <p>Date Applied : {{application.app_date}}</p>
                 <button class="btn" id="yellow" (click)="editApplication(app, application)">Edit
                 </button>
-                <button class="btn btn-danger" (click)="open(content)">Delete</button>
+                <button class="btn btn-danger" (click)="open(content)">Passed on <i class="fa fa-meh-o fa-lg" aria-hidden="true"></i></button>
                   <div>
                     <ng-template #content let-c="close" let-d="dismiss">
                       <div class="modal-header">

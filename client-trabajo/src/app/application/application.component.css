@@ -1,16 +1,15 @@
 .status {
-	margin: 35px;
+	margin: 30px;
 	width: 170px;
 }
 
 .app {
-	margin: 35px;
+	margin: 25px;
 }
 
-.info {
-	width: 170px;
+.card-body{
+	padding: 0;
 }
-
 #m {
 	color: #000000;
 	margin-right: 10px;
@@ -26,11 +25,13 @@
 @media only screen and (max-width: 525px) and (min-width: 320px) {
 
 	.status {
-		margin: 15px;
+		margin-left: 40px;
 		width: 170px;
 	}
 	.app {
+	
 		margin: 15px;
+		margin-left: 40px;
 	}	
 
 }

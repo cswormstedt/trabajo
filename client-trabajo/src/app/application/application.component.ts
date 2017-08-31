@@ -1,10 +1,11 @@
 import { Component} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { ControlValueAccessor} from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { NgProgressService } from 'ngx-progressbar';
 import { NgbModule, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -18,6 +19,7 @@ class Application{
   company_name: string;
   user_id: number;
   active: number;
+  currentValue: number;
 
 }
 
@@ -33,13 +35,11 @@ export class ApplicationComponent {
   applications: Application[] = [];
   newApplication: Application = new Application();
   updateApplication: Application = new Application();
-  showPostForm: boolean = false;
-  // showPatchForm: boolean = true;
+
   today: number = Date.now();
   currentUpdate: string;
   closeResult: string;
-  currentShowId: number;
-
+  currentValue = 0;
 
   update = [
   "Want",
@@ -50,38 +50,45 @@ export class ApplicationComponent {
   ];
 
   // method that runs when Class is initialized
-  constructor(private http: Http, private router: Router, public progressService: NgProgressService, private modalService: NgbModal){
+  constructor(private http: Http, 
+              private router: Router,
+              public progressService: NgProgressService, 
+              private modalService: NgbModal){
  
-    this.getApplications();
+              this.getApplications();
+             
 
-  }
-
-  getActiveDays(){
+              
     
-  }
+}
+
+getActiveDate(){
+      for (let i = 0; i <= this.applications.length -1; i++) {
+
+      let date1 = new Date(this.applications[i]["app_date"]);
   
+      let date2 = new Date(this.today);
+    
+      let timeDiff = Math.abs(date2.getTime() - date1.getTime());
+
+      let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+      this.applications[i]["active"] = diffDays - 1;
+      console.log(this.applications[i])
+      }
+     }
+ 
   getApplications(){
     this.progressService.start();
     this.http.get('http://localhost:9393/applications?token=' + window.localStorage.token).subscribe(response => {
-      this.applications = response.json()
-
-    for (let i = 0; i <= this.applications.length -1; i++) {
-  
-        let date1 = new Date(this.applications[i]["app_date"]);
-    
-        let date2 = new Date(this.today);
+      this.applications = response.json();
+      this.getActiveDate();
+      this.progressService.done()
       
-
-        let timeDiff = Math.abs(date2.getTime() - date1.getTime());
-
-        let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-        this.applications[i]["active"] = diffDays - 1;
-
     }
-    this.progressService.done()
+    
       
-    }, err => {
+    , err => {
       //if permission denied
       if(err.status === 403){
         this.router.navigate(['/login'])
@@ -93,10 +100,10 @@ export class ApplicationComponent {
 
   postApplication(){
    
-    this.showPostForm = false;
+   
     this.http.post('http://localhost:9393/applications?token=' + window.localStorage.token, this.newApplication).subscribe(response =>{
       this.applications = response.json()
-
+      this.getActiveDate();
 
 
     }, err =>{
