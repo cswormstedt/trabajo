@@ -134,11 +134,12 @@ getActiveDate(){
   }
 
   deleteApplication(application){
-    this.http.delete('http://localhost:9393/applications/' + application.id + '?token=' + window.localStorage.token ).subscribe(response =>
+    this.http.delete('http://localhost:9393/applications/' + application.id + '?token=' + window.localStorage.token ).subscribe(response => {
       this.applications = response.json();
+
       this.getActiveDate();
 
-    )
+    })
   }
 
 open(content) {
