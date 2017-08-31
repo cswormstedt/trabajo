@@ -74,7 +74,6 @@ getActiveDate(){
       let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
       this.applications[i]["active"] = diffDays - 1;
-      console.log(this.applications[i])
       }
      }
  
@@ -120,6 +119,7 @@ getActiveDate(){
     // this.showPatchForm = true;
     this.http.patch('http://localhost:9393/applications/' + this.updateApplication.id + '?token=' + window.localStorage.token, this.updateApplication).subscribe(response => {
       this.applications = response.json();
+      this.getActiveDate();
    
 
     })
@@ -135,7 +135,8 @@ getActiveDate(){
 
   deleteApplication(application){
     this.http.delete('http://localhost:9393/applications/' + application.id + '?token=' + window.localStorage.token ).subscribe(response =>
-      this.applications = response.json()
+      this.applications = response.json();
+      this.getActiveDate();
 
     )
   }
